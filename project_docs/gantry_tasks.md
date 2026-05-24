@@ -34,9 +34,9 @@
 - [x] Install belt tensioning system
 
 ### X-Axis (Estimated: 2-3 hours)
-- [ ] Install linear rails on X-axis
-- [ ] Assemble carriage
-- [ ] Mount toolhead plate
+- [x] Install linear rails on X-axis
+- [x] Assemble carriage
+- [ ] Mount toolhead plate (moves to toolhead task)
 
 ### Belts (Estimated: 2-3 hours)
 - [ ] Cut A and B belts to length
@@ -58,12 +58,12 @@
 - [ ] Assemble Stealthburner
 - [ ] Install extruder
 - [ ] Install hotend
-- [ ] Mount toolhead on X-axis carriage
+- [ ] Mount toolhead plate on X-axis carriage
+- [ ] Mount Stealthburner on toolhead plate
 
 ## Progress Tracking
 
 ### To Do
-[ ] Assemble X-Axis (Est: 2-3 hours)
 [ ] Assemble and install toolhead (Est: 2-3 hours)
 [ ] Wiring and cable management (Est: 2-3 hours)
 
@@ -75,6 +75,7 @@
 [x] Assemble Front Idlers (Est: 1-2 hours)
 [x] Assemble Z-Joints and Belt Clips (Est: 1-2 hours)
 [x] Assemble Z-Chain Components (Est: 1-2 hours)
+[x] Assemble X-Axis Carriage (Est: 2-3 hours)
 
 ### Done (Phase 1: Frame Build)
 [x] Extrusion frame cut to size
