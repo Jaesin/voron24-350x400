@@ -74,10 +74,14 @@
 ### In Progress
 [ ]
 
-### Done
-[x] Main frame construction completed
+### Done (Phase 1: Frame Build)
+[x] Extrusion frame cut to size
+[x] Frame assembled with corner brackets
+[x] Frame squared and verified
 [x] STL files verified available
 [x] Assembly manual reviewed
+
+### Done (Phase 2: Gantry Components)
 [x] Print all gantry components (20+ hours printer time)
 [x] Clean and prepare printed parts
 [x] Gantry structure assembly

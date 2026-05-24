@@ -8,3 +8,6 @@ Voron-2-2.4r2.tar.gz
 
 # OS files
 .DS_Store
+
+# Agent browser artifacts
+--daemon

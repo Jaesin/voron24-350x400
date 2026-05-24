@@ -185,6 +185,7 @@ body {
 <div id="root"></div>
 <script type="text/babel">
 const tasks = [
+  { name: 'Frame Construction', time: '4-6h', status: 'done', group: 'Frame' },
   { name: 'Print All Gantry Components', time: '~20h', status: 'done', group: 'Printing' },
   { name: 'Gantry Structure Assembly', time: '3-4h', status: 'done', group: 'Assembly' },
   { name: 'Assemble AB Drive Units', time: '3-4h', status: 'pending', group: 'Mechanical' },
@@ -198,6 +199,7 @@ const tasks = [
 ];
 
 const milestones = [
+  { name: 'Frame Build', status: 'done', icon: '🔩' },
   { name: 'Gantry Complete', status: 'active', icon: '⚙' },
   { name: 'Electronics & Wiring', status: 'future', icon: '⚡' },
   { name: 'Panels & Enclosure', status: 'future', icon: '📦' },
@@ -224,7 +226,7 @@ const ProgressBar = ({ label, pct }) => (
 const TaskTable = () => (
   <div className="glass">
     <div className="card-title">Task Progress</div>
-    <ProgressBar label="Overall Completion" pct={25} />
+    <ProgressBar label="Overall Completion" pct={30} />
     <table className="task-table">
       <thead><tr><th>Task</th><th>Est. Time</th><th></th></tr></thead>
       <tbody>
@@ -247,8 +249,8 @@ const StatsGrid = () => (
   <div className="glass">
     <div className="card-title">Project Stats</div>
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 16 }}>
-      <div className="stat-card"><div className="number">1</div><div className="label">of 4 Phases</div></div>
-      <div className="stat-card"><div className="number">2</div><div className="label">Tasks Done</div></div>
+      <div className="stat-card"><div className="number">2</div><div className="label">of 5 Phases</div></div>
+      <div className="stat-card"><div className="number">3</div><div className="label">Tasks Done</div></div>
       <div className="stat-card"><div className="number">8</div><div className="label">Remaining</div></div>
       <div className="stat-card"><div className="number">~19h</div><div className="label">Est. Left</div></div>
     </div>
