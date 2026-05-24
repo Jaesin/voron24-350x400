@@ -576,8 +576,8 @@ const data = {
     { name: 'Assemble Front Idlers', time: '1-2h', status: 'done', group: 'Mechanical' },
     { name: 'Install & Tension Belts', time: '2-3h', status: 'active', group: 'Belts' },
     { name: 'Assemble X-Axis Carriage', time: '2-3h', status: 'pending', group: 'Mechanical' },
-    { name: 'Assemble Z-Joints & Belt Clips', time: '1-2h', status: 'pending', group: 'Mechanical' },
-    { name: 'Assemble Z-Chain Components', time: '1-2h', status: 'pending', group: 'Wiring' },
+    { name: 'Assemble Z-Joints & Belt Clips', time: '1-2h', status: 'done', group: 'Mechanical' },
+    { name: 'Assemble Z-Chain Components', time: '1-2h', status: 'done', group: 'Wiring' },
     { name: 'Assemble & Install Toolhead', time: '2-3h', status: 'pending', group: 'Toolhead' },
     { name: 'Wiring & Cable Management', time: '2-3h', status: 'pending', group: 'Wiring' },
   ],
@@ -632,7 +632,7 @@ function render() {
         <span class="phase-pulse"></span>
         <span class="phase-label">Current Phase</span>
         <span class="phase-name">Gantry Assembly</span>
-        <span class="phase-est">~10-16h remaining</span>
+        <span class="phase-est">~8-12h remaining</span>
       </div>
 
       <!-- Main Grid -->
@@ -744,7 +744,7 @@ function render() {
                   <div class="lbl">remaining</div>
                 </div>
                 <div class="stat-item">
-                  <div class="num cyan">~19h</div>
+                  <div class="num cyan">~10h</div>
                   <div class="lbl">est. left</div>
                 </div>
               </div>

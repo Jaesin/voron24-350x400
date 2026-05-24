@@ -64,9 +64,8 @@
 
 ### To Do
 [ ] Assemble X-Axis (Est: 2-3 hours)
-[ ] Assemble Z-Joints and Belt Clips (Est: 1-2 hours)
-[ ] Assemble Z-Chain Components (Est: 1-2 hours)
 [ ] Assemble and install toolhead (Est: 2-3 hours)
+[ ] Wiring and cable management (Est: 2-3 hours)
 
 ### In Progress
 [x] Install and tension belts (Est: 2-3 hours)
@@ -74,6 +73,8 @@
 ### Done (Phase 3: Gantry Mechanical)
 [x] Assemble AB Drive Units (Est: 3-4 hours)
 [x] Assemble Front Idlers (Est: 1-2 hours)
+[x] Assemble Z-Joints and Belt Clips (Est: 1-2 hours)
+[x] Assemble Z-Chain Components (Est: 1-2 hours)
 
 ### Done (Phase 1: Frame Build)
 [x] Extrusion frame cut to size
