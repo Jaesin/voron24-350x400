@@ -14,6 +14,12 @@ This project uses **GitHub's free tools** (Issues, Projects, Milestones, Labels)
 | **Labels** | Categorize tasks for filtering and assignment |
 | **GitHub MCP** | All GitHub operations (create/update issues, manage project boards, query status) |
 
+## Dashboard
+
+Live at **https://voron24.mulenex.org/** — static React dashboard deployed via GitHub Pages from `docs/index.html`. Updates on every push to `main`. Background image sourced from `https://vorondesign.com/images/voron2.4.jpg`.
+
+Project board: **https://github.com/users/Jaesin/projects/2**
+
 ## Task Workflow
 
 1. **Create an issue** for each task with a clear title and description (see template below)
