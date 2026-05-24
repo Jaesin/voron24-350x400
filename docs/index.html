@@ -365,6 +365,7 @@ body::after {
 
 .led.done { background: var(--green); box-shadow: 0 0 6px var(--green); }
 .led.pending { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+.led.active { background: var(--accent); box-shadow: 0 0 12px var(--accent); animation: pulse 1.8s ease-in-out infinite; }
 
 .task-badge {
   font-family: var(--font-mono);
@@ -377,6 +378,7 @@ body::after {
 
 .task-badge.done { background: var(--success-bg); color: var(--green); }
 .task-badge.pending { background: var(--pending-bg); color: var(--accent); }
+.task-badge.active { background: var(--active-bg, rgba(245,158,11,0.15)); color: var(--accent); border-color: var(--accent); }
 
 .task-time {
   font-family: var(--font-mono);
@@ -570,10 +572,10 @@ const data = {
     { name: 'Frame Construction', time: '4-6h', status: 'done', group: 'Frame' },
     { name: 'Print All Gantry Components', time: '~20h', status: 'done', group: 'Printing' },
     { name: 'Gantry Structure Assembly', time: '3-4h', status: 'done', group: 'Assembly' },
-    { name: 'Assemble AB Drive Units', time: '3-4h', status: 'pending', group: 'Mechanical' },
-    { name: 'Assemble Front Idlers', time: '1-2h', status: 'pending', group: 'Mechanical' },
+    { name: 'Assemble AB Drive Units', time: '3-4h', status: 'done', group: 'Mechanical' },
+    { name: 'Assemble Front Idlers', time: '1-2h', status: 'done', group: 'Mechanical' },
+    { name: 'Install & Tension Belts', time: '2-3h', status: 'active', group: 'Belts' },
     { name: 'Assemble X-Axis Carriage', time: '2-3h', status: 'pending', group: 'Mechanical' },
-    { name: 'Install & Tension Belts', time: '2-3h', status: 'pending', group: 'Belts' },
     { name: 'Assemble Z-Joints & Belt Clips', time: '1-2h', status: 'pending', group: 'Mechanical' },
     { name: 'Assemble Z-Chain Components', time: '1-2h', status: 'pending', group: 'Wiring' },
     { name: 'Assemble & Install Toolhead', time: '2-3h', status: 'pending', group: 'Toolhead' },
@@ -630,7 +632,7 @@ function render() {
         <span class="phase-pulse"></span>
         <span class="phase-label">Current Phase</span>
         <span class="phase-name">Gantry Assembly</span>
-        <span class="phase-est">~16-23h remaining</span>
+        <span class="phase-est">~10-16h remaining</span>
       </div>
 
       <!-- Main Grid -->
@@ -709,7 +711,7 @@ function render() {
                       </td>
                       <td><span class="task-time">${t.time}</span></td>
                       <td style="text-align:right">
-                        <span class="task-badge ${t.status}">${t.status}</span>
+                        <span class="task-badge ${t.status}">${t.status === 'active' ? 'In Progress' : t.status === 'done' ? 'Done' : 'Pending'}</span>
                       </td>
                     </tr>
                   `).join('')}

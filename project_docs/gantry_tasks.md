@@ -25,13 +25,13 @@
 - [x] Assemble gantry structure
 
 ### AB Drive Units (Estimated: 3-4 hours)
-- [ ] Install linear rails and bearings
-- [ ] Install motors
-- [ ] Install cable management
+- [x] Install linear rails and bearings
+- [x] Install motors
+- [x] Install cable management
 
 ### Front Idlers (Estimated: 1-2 hours)
-- [ ] Assemble idler mechanisms
-- [ ] Install belt tensioning system
+- [x] Assemble idler mechanisms
+- [x] Install belt tensioning system
 
 ### X-Axis (Estimated: 2-3 hours)
 - [ ] Install linear rails on X-axis
@@ -63,16 +63,17 @@
 ## Progress Tracking
 
 ### To Do
-[ ] Assemble AB Drive Units (Est: 3-4 hours)
-[ ] Assemble Front Idlers (Est: 1-2 hours)
 [ ] Assemble X-Axis (Est: 2-3 hours)
-[ ] Install and tension belts (Est: 2-3 hours)
 [ ] Assemble Z-Joints and Belt Clips (Est: 1-2 hours)
 [ ] Assemble Z-Chain Components (Est: 1-2 hours)
 [ ] Assemble and install toolhead (Est: 2-3 hours)
 
 ### In Progress
-[ ]
+[x] Install and tension belts (Est: 2-3 hours)
+
+### Done (Phase 3: Gantry Mechanical)
+[x] Assemble AB Drive Units (Est: 3-4 hours)
+[x] Assemble Front Idlers (Est: 1-2 hours)
 
 ### Done (Phase 1: Frame Build)
 [x] Extrusion frame cut to size
