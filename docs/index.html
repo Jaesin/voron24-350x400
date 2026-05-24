@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Voron 2.4 Build Dashboard</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  background: url('https://vorondesign.com/images/voron2.4.jpg') center/cover no-repeat fixed;
+}
+#root { min-height: 100vh; }
+.overlay {
+  min-height: 100vh;
+  background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.45) 100%);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.header {
+  text-align: center;
+  padding: 32px 24px;
+}
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+.header .subtitle {
+  color: rgba(255,255,255,0.7);
+  font-size: 1.1rem;
+  margin-top: 8px;
+}
+.header .dimensions {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 6px 20px;
+  background: rgba(220, 50, 50, 0.25);
+  border: 1px solid rgba(220, 50, 50, 0.4);
+  border-radius: 20px;
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.glass {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 24px;
+  color: #fff;
+}
+.card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 16px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; }
+  .overlay { padding: 16px; }
+  .header h1 { font-size: 1.8rem; }
+}
+.progress-section { margin-bottom: 16px; }
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  color: rgba(255,255,255,0.8);
+}
+.progress-bar-bg {
+  height: 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #dc3232, #ff6b6b);
+  transition: width 0.6s ease;
+}
+.task-table { width: 100%; border-collapse: collapse; }
+.task-table th {
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.4);
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.task-table td {
+  padding: 10px 12px;
+  font-size: 0.85rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.85);
+}
+.status-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+.status-dot.done { background: #4ade80; }
+.status-dot.pending { background: #fbbf24; }
+.status-dot.future { background: rgba(255,255,255,0.25); }
+.stat-card {
+  text-align: center;
+  padding: 16px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 12px;
+}
+.stat-card .number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+}
+.stat-card .label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 4px;
+}
+.milestone {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.milestone:last-child { border-bottom: none; }
+.milestone-icon {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.milestone-icon.active { background: rgba(220, 50, 50, 0.3); color: #ff6b6b; }
+.milestone-icon.done { background: rgba(74, 222, 128, 0.3); color: #4ade80; }
+.milestone-icon.future { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); }
+.milestone-info { flex: 1; }
+.milestone-info .name { font-size: 0.9rem; font-weight: 600; }
+.milestone-info .status { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+.github-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
+}
+.voron-footer {
+  text-align: center;
+  padding: 16px;
+  color: rgba(255,255,255,0.3);
+  font-size: 0.8rem;
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const tasks = [
+  { name: 'Print All Gantry Components', time: '~20h', status: 'done', group: 'Printing' },
+  { name: 'Gantry Structure Assembly', time: '3-4h', status: 'done', group: 'Assembly' },
+  { name: 'Assemble AB Drive Units', time: '3-4h', status: 'pending', group: 'Mechanical' },
+  { name: 'Assemble Front Idlers', time: '1-2h', status: 'pending', group: 'Mechanical' },
+  { name: 'Assemble X-Axis Carriage', time: '2-3h', status: 'pending', group: 'Mechanical' },
+  { name: 'Install & Tension Belts', time: '2-3h', status: 'pending', group: 'Belts' },
+  { name: 'Assemble Z-Joints & Belt Clips', time: '1-2h', status: 'pending', group: 'Mechanical' },
+  { name: 'Assemble Z-Chain Components', time: '1-2h', status: 'pending', group: 'Wiring' },
+  { name: 'Assemble & Install Toolhead', time: '2-3h', status: 'pending', group: 'Toolhead' },
+  { name: 'Wiring & Cable Management', time: '2-3h', status: 'pending', group: 'Wiring' },
+];
+
+const milestones = [
+  { name: 'Gantry Complete', status: 'active', icon: '⚙' },
+  { name: 'Electronics & Wiring', status: 'future', icon: '⚡' },
+  { name: 'Panels & Enclosure', status: 'future', icon: '📦' },
+  { name: 'First Print', status: 'future', icon: '🎯' },
+];
+
+const PhaseIndicator = () => (
+  <div className="glass" style={{ textAlign: 'center', padding: '20px 24px', marginBottom: 8 }}>
+    <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'rgba(255,255,255,0.4)', marginBottom: 8 }}>Current Phase</div>
+    <div style={{ fontSize: '1.4rem', fontWeight: 700, color: '#ff6b6b' }}>⚙ Gantry Assembly</div>
+    <div style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)', marginTop: 4 }}>Estimated ~16&ndash;23 hours remaining</div>
+  </div>
+);
+
+const ProgressBar = ({ label, pct }) => (
+  <div className="progress-section">
+    <div className="progress-label"><span>{label}</span><span>{pct}%</span></div>
+    <div className="progress-bar-bg">
+      <div className="progress-bar-fill" style={{ width: pct + '%' }}></div>
+    </div>
+  </div>
+);
+
+const TaskTable = () => (
+  <div className="glass">
+    <div className="card-title">Task Progress</div>
+    <ProgressBar label="Overall Completion" pct={25} />
+    <table className="task-table">
+      <thead><tr><th>Task</th><th>Est. Time</th><th></th></tr></thead>
+      <tbody>
+        {tasks.map((t, i) => (
+          <tr key={i}>
+            <td><span className={'status-dot ' + t.status}></span>{t.name}</td>
+            <td style={{ color: 'rgba(255,255,255,0.5)' }}>{t.time}</td>
+            <td style={{ textAlign: 'right' }}>
+              {t.status === 'done' ? <span style={{ color: '#4ade80', fontSize: '0.8rem' }}>Done</span> :
+               t.status === 'pending' ? <span style={{ color: '#fbbf24', fontSize: '0.8rem' }}>Pending</span> : null}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
+
+const StatsGrid = () => (
+  <div className="glass">
+    <div className="card-title">Project Stats</div>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 16 }}>
+      <div className="stat-card"><div className="number">1</div><div className="label">of 4 Phases</div></div>
+      <div className="stat-card"><div className="number">2</div><div className="label">Tasks Done</div></div>
+      <div className="stat-card"><div className="number">8</div><div className="label">Remaining</div></div>
+      <div className="stat-card"><div className="number">~19h</div><div className="label">Est. Left</div></div>
+    </div>
+  </div>
+);
+
+const Milestones = () => (
+  <div className="glass">
+    <div className="card-title">Milestones</div>
+    {milestones.map((m, i) => (
+      <div className="milestone" key={i}>
+        <div className={'milestone-icon ' + m.status}>{m.icon}</div>
+        <div className="milestone-info">
+          <div className="name">{m.name}</div>
+          <div className="status">{m.status === 'active' ? 'Current' : m.status === 'done' ? 'Complete' : 'Upcoming'}</div>
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
+const LinksCard = () => (
+  <div className="glass">
+    <div className="card-title">Quick Links</div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <a className="github-badge" href="https://github.com/VoronDesign/Voron-2/blob/Voron2.4/Manual/Assembly_Manual_2.4r2.pdf" target="_blank" style={{ textDecoration: 'none' }}>
+        <span>📖</span> Assembly Manual
+      </a>
+      <a className="github-badge" href="https://github.com/VoronDesign/Voron-2/tree/Voron2.4/CAD" target="_blank" style={{ textDecoration: 'none' }}>
+        <span>🔧</span> CAD Files
+      </a>
+      <a className="github-badge" href="https://discord.gg/voron" target="_blank" style={{ textDecoration: 'none' }}>
+        <span>💬</span> Voron Discord
+      </a>
+      <a className="github-badge" href="https://docs.vorondesign.com" target="_blank" style={{ textDecoration: 'none' }}>
+        <span>📄</span> Voron Docs
+      </a>
+    </div>
+  </div>
+);
+
+const App = () => (
+  <div className="overlay">
+    <div className="header">
+      <h1>VORON 2.4</h1>
+      <div className="subtitle">350×400mm Gantry Build Dashboard</div>
+      <div className="dimensions">Custom Build · 350mm × 400mm × 250mm</div>
+    </div>
+
+    <PhaseIndicator />
+
+    <div className="grid">
+      <div>
+        <TaskTable />
+      </div>
+      <div>
+        <StatsGrid />
+        <div style={{ marginTop: 24 }}>
+          <Milestones />
+        </div>
+        <div style={{ marginTop: 24 }}>
+          <LinksCard />
+        </div>
+      </div>
+    </div>
+
+    <div className="voron-footer">
+      Built with ❤️ for the Voron community · v0.1.0
+    </div>
+  </div>
+);
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

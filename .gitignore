@@ -1,0 +1,10 @@
+# Voron design files (STLs, CAD, manual, firmware)
+Voron-2-2.4r2/
+Voron-2-2.4r2.tar.gz
+40 percent infill parts.3mf
+
+# Browser automation artifacts
+.playwright-mcp/
+
+# OS files
+.DS_Store
