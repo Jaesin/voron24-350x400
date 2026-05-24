@@ -18,10 +18,20 @@ body {
 .overlay {
   min-height: 100vh;
   background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.45) 100%);
+  display: flex;
+  justify-content: center;
+}
+.container {
+  width: 100%;
+  max-width: 1200px;
   padding: 32px;
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+@media (max-width: 768px) {
+  .container { padding: 16px; }
+  .header h1 { font-size: 1.8rem; }
 }
 .header {
   text-align: center;
@@ -74,8 +84,6 @@ body {
 }
 @media (max-width: 768px) {
   .grid { grid-template-columns: 1fr; }
-  .overlay { padding: 16px; }
-  .header h1 { font-size: 1.8rem; }
 }
 .progress-section { margin-bottom: 16px; }
 .progress-label {
@@ -294,31 +302,33 @@ const LinksCard = () => (
 
 const App = () => (
   <div className="overlay">
-    <div className="header">
-      <h1>VORON 2.4</h1>
-      <div className="subtitle">350×400mm Gantry Build Dashboard</div>
-      <div className="dimensions">Custom Build · 350mm × 400mm × 250mm</div>
-    </div>
-
-    <PhaseIndicator />
-
-    <div className="grid">
-      <div>
-        <TaskTable />
+    <div className="container">
+      <div className="header">
+        <h1>VORON 2.4</h1>
+        <div className="subtitle">350×400mm Gantry Build Dashboard</div>
+        <div className="dimensions">Custom Build · 350mm × 400mm × 250mm</div>
       </div>
-      <div>
-        <StatsGrid />
-        <div style={{ marginTop: 24 }}>
-          <Milestones />
+
+      <PhaseIndicator />
+
+      <div className="grid">
+        <div>
+          <TaskTable />
         </div>
-        <div style={{ marginTop: 24 }}>
-          <LinksCard />
+        <div>
+          <StatsGrid />
+          <div style={{ marginTop: 24 }}>
+            <Milestones />
+          </div>
+          <div style={{ marginTop: 24 }}>
+            <LinksCard />
+          </div>
         </div>
       </div>
-    </div>
 
-    <div className="voron-footer">
-      Built with ❤️ for the Voron community · v0.1.0
+      <div className="voron-footer">
+        Built with ❤️ for the Voron community · v0.1.0
+      </div>
     </div>
   </div>
 );
